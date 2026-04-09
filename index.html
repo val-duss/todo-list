@@ -18,6 +18,13 @@
         autocomplete="off"
         required
       />
+      <select id="category-select">
+        <option value="travail">💼 Travail</option>
+        <option value="perso">🏠 Perso</option>
+        <option value="administratif">📋 Administratif</option>
+        <option value="sport">⚽ Sport</option>
+        <option value="achat">🛒 Achat</option>
+      </select>
       <button type="submit">Ajouter</button>
     </form>
 
@@ -25,6 +32,15 @@
       <button class="filter-btn active" data-filter="all">Toutes</button>
       <button class="filter-btn" data-filter="active">À faire</button>
       <button class="filter-btn" data-filter="completed">Terminées</button>
+    </div>
+
+    <div class="filters cat-filters">
+      <button class="cat-btn active" data-cat="all">Tout</button>
+      <button class="cat-btn" data-cat="travail">💼 Travail</button>
+      <button class="cat-btn" data-cat="perso">🏠 Perso</button>
+      <button class="cat-btn" data-cat="administratif">📋 Admin</button>
+      <button class="cat-btn" data-cat="sport">⚽ Sport</button>
+      <button class="cat-btn" data-cat="achat">🛒 Achat</button>
     </div>
 
     <ul id="todo-list"></ul>
