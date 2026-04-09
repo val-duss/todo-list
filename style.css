@@ -34,6 +34,7 @@ h1 {
 /* Form */
 #todo-form {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 0 24px 20px;
 }
@@ -49,6 +50,22 @@ h1 {
 }
 
 #todo-input:focus {
+  border-color: #667eea;
+}
+
+#category-select {
+  padding: 12px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  background: #fff;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+#category-select:focus {
   border-color: #667eea;
 }
 
@@ -76,8 +93,15 @@ h1 {
 /* Filters */
 .filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 0 24px 16px;
+}
+
+.cat-filters {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+  margin-top: -4px;
 }
 
 .filter-btn {
@@ -101,6 +125,40 @@ h1 {
   border-color: transparent;
   color: #fff;
   font-weight: 600;
+}
+
+/* Category buttons */
+.cat-btn {
+  padding: 6px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 20px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.cat-btn:hover {
+  border-color: #764ba2;
+  color: #764ba2;
+}
+
+.cat-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Category badge on tasks */
+.cat-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* List */
