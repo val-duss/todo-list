@@ -66,7 +66,11 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         raise HTTPException(status_code=401, detail="Utilisateur introuvable")
     return user
 
-# ── Auth routes ────────────────────────────────────────────
+# ── Routes ────────────────────────────────────────────────
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 @app.post("/auth/register", status_code=201)
 def register(data: UserCreate, db: Session = Depends(get_db)):
@@ -90,8 +94,6 @@ def login(data: UserCreate, db: Session = Depends(get_db)):
 @app.get("/auth/me")
 def me(current_user=Depends(get_current_user)):
     return {"id": current_user.id, "username": current_user.username}
-
-# ── Todo routes ────────────────────────────────────────────
 
 @app.get("/todos")
 def get_todos(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
