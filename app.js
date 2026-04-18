@@ -49,6 +49,7 @@ async function apiFetch(path, options = {}) {
   return res.json();
 }
 
+// ── Render ────────────────────────────────────────────────────────────────────
 function render() {
   const filtered = todos.filter(t => {
     const statusOk = currentFilter === 'all' || (currentFilter === 'active' ? !t.done : t.done);
@@ -128,6 +129,13 @@ async function clearCompleted() {
   render();
 }
 
+async function clearCompleted() {
+  await apiFetch('/todos/completed', { method: 'DELETE' });
+  todos = todos.filter(t => !t.done);
+  render();
+}
+
+// ── Events ────────────────────────────────────────────────────────────────────
 form.addEventListener('submit', e => {
   e.preventDefault();
   const text = input.value.trim();
