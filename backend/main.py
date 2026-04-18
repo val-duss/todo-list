@@ -24,7 +24,7 @@ app.add_middleware(
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
-# ── Schemas ───────────────────────────────────────────────────────────────────
+# ── Schemas ─────────────────────────────────────────────
 
 class UserCreate(BaseModel):
     username: str
@@ -54,7 +54,7 @@ class TodoUpdate(BaseModel):
     text: Optional[str] = None
     category: Optional[str] = None
 
-# ── Auth dependency ───────────────────────────────────────────────────────────
+# ── Auth dependency ────────────────────────────────────────────
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     try:
@@ -66,7 +66,11 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         raise HTTPException(status_code=401, detail="Utilisateur introuvable")
     return user
 
-# ── Auth routes ───────────────────────────────────────────────────────────────
+# ── Routes ────────────────────────────────────────────────
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 @app.post("/auth/register", status_code=201)
 def register(data: UserCreate, db: Session = Depends(get_db)):
@@ -87,15 +91,9 @@ def login(data: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Identifiants incorrects")
     return {"access_token": auth.create_access_token(user.username), "username": user.username}
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
-
 @app.get("/auth/me")
 def me(current_user=Depends(get_current_user)):
     return {"id": current_user.id, "username": current_user.username}
-
-# ── Todo routes ───────────────────────────────────────────────────────────────
 
 @app.get("/todos")
 def get_todos(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
@@ -114,7 +112,6 @@ def create_todo(data: TodoCreate, current_user=Depends(get_current_user), db: Se
     db.refresh(todo)
     return todo
 
-# Must be defined BEFORE /todos/{todo_id} to avoid route conflict
 @app.delete("/todos/completed", status_code=204)
 def delete_completed(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
     db.query(models.Todo).filter(

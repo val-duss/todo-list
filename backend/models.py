@@ -5,11 +5,11 @@ from database import Base
 
 class User(Base):
     __tablename__ = "users"
-    id             = Column(Integer, primary_key=True, index=True)
-    username       = Column(String, unique=True, index=True, nullable=False)
+    id              = Column(Integer, primary_key=True, index=True)
+    username        = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
-    created_at     = Column(DateTime, default=lambda: datetime.now(timezone.utc))
-    todos          = relationship("Todo", back_populates="owner", cascade="all, delete-orphan")
+    created_at      = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    todos           = relationship("Todo", back_populates="owner", cascade="all, delete-orphan")
 
 class Todo(Base):
     __tablename__ = "todos"

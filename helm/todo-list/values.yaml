@@ -57,13 +57,8 @@ ingress:
   enabled: false
   className: "nginx"
   annotations: {}
-    # cert-manager.io/cluster-issuer: letsencrypt-prod
   frontend:
     host: todo-list.example.com
   backend:
     host: api.todo-list.example.com
   tls: []
-    # - secretName: todo-list-tls
-    #   hosts:
-    #     - todo-list.example.com
-    #     - api.todo-list.example.com

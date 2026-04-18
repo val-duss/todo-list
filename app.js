@@ -1,4 +1,3 @@
-// ── Auth guard ────────────────────────────────────────────────────────────────
 const token = localStorage.getItem('auth_token');
 if (!token) window.location.href = 'login.html';
 
@@ -10,7 +9,6 @@ document.getElementById('logout-btn').addEventListener('click', () => {
   window.location.href = 'login.html';
 });
 
-// ── Constants ─────────────────────────────────────────────────────────────────
 const CATEGORY_COLORS = {
   travail:       { bg: '#dbeafe', text: '#1d4ed8' },
   perso:         { bg: '#dcfce7', text: '#15803d' },
@@ -27,12 +25,10 @@ const CATEGORY_LABELS = {
   achat:         '🛒 Achat',
 };
 
-// ── State ─────────────────────────────────────────────────────────────────────
 let todos = [];
 let currentFilter = 'all';
 let currentCat    = 'all';
 
-// ── DOM refs ──────────────────────────────────────────────────────────────────
 const form           = document.getElementById('todo-form');
 const input          = document.getElementById('todo-input');
 const categorySelect = document.getElementById('category-select');
@@ -42,7 +38,6 @@ const clearBtn       = document.getElementById('clear-completed');
 const filterBtns     = document.querySelectorAll('.filter-btn');
 const catBtns        = document.querySelectorAll('.cat-btn');
 
-// ── API helpers ───────────────────────────────────────────────────────────────
 function headers() {
   return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` };
 }
@@ -74,7 +69,7 @@ function render() {
     checkbox.addEventListener('change', () => toggle(todo));
 
     const label = document.createElement('label');
-    label.htmlFor    = 'item-' + todo.id;
+    label.htmlFor     = 'item-' + todo.id;
     label.textContent = todo.text;
 
     const badge = document.createElement('span');
@@ -98,7 +93,6 @@ function render() {
   itemsLeft.textContent = `${remaining} tâche${remaining !== 1 ? 's' : ''} restante${remaining !== 1 ? 's' : ''}`;
 }
 
-// ── API actions ───────────────────────────────────────────────────────────────
 async function loadTodos() {
   todos = await apiFetch('/todos') || [];
   render();
@@ -135,6 +129,12 @@ async function clearCompleted() {
   render();
 }
 
+async function clearCompleted() {
+  await apiFetch('/todos/completed', { method: 'DELETE' });
+  todos = todos.filter(t => !t.done);
+  render();
+}
+
 // ── Events ────────────────────────────────────────────────────────────────────
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -162,5 +162,4 @@ catBtns.forEach(btn => {
   });
 });
 
-// ── Init ──────────────────────────────────────────────────────────────────────
 loadTodos();

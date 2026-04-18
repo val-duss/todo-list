@@ -1,4 +1,3 @@
-// Redirect if already authenticated
 if (localStorage.getItem('auth_token')) {
   window.location.href = 'index.html';
 }
