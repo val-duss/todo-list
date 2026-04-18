@@ -1,0 +1,12 @@
+apiVersion: v2
+name: todo-list
+description: Todo List app — FastAPI backend + nginx frontend + SQLite
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+keywords:
+  - todo
+  - fastapi
+  - python
+maintainers:
+  - name: val-duss

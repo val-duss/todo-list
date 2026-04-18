@@ -87,6 +87,10 @@ def login(data: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Identifiants incorrects")
     return {"access_token": auth.create_access_token(user.username), "username": user.username}
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 @app.get("/auth/me")
 def me(current_user=Depends(get_current_user)):
     return {"id": current_user.id, "username": current_user.username}

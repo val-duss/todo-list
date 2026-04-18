@@ -1,0 +1,69 @@
+nameOverride: ""
+fullnameOverride: ""
+
+# ── Backend ───────────────────────────────────────────────────────────────────
+backend:
+  image:
+    repository: ghcr.io/val-duss/todo-list-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicas: 1
+  port: 8000
+  secretKey: "change-this-secret-in-production"
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+# ── Frontend ──────────────────────────────────────────────────────────────────
+frontend:
+  image:
+    repository: ghcr.io/val-duss/todo-list-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicas: 1
+  port: 80
+  # URL visible depuis le navigateur pour joindre le backend
+  apiUrl: "http://api.todo-list.example.com"
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+# ── Persistence (SQLite) ──────────────────────────────────────────────────────
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: ""
+  accessMode: ReadWriteOnce
+
+# ── Services ──────────────────────────────────────────────────────────────────
+service:
+  backend:
+    type: ClusterIP
+    port: 8000
+  frontend:
+    type: ClusterIP
+    port: 80
+
+# ── Ingress ───────────────────────────────────────────────────────────────────
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations: {}
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+  frontend:
+    host: todo-list.example.com
+  backend:
+    host: api.todo-list.example.com
+  tls: []
+    # - secretName: todo-list-tls
+    #   hosts:
+    #     - todo-list.example.com
+    #     - api.todo-list.example.com
