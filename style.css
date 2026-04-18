@@ -257,3 +257,125 @@ h1 {
 #clear-completed:hover {
   color: #e74c3c;
 }
+
+/* ── User bar ─────────────────────────────────────────────────────────────── */
+.user-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+#logout-btn {
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#logout-btn:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+/* ── Auth page ────────────────────────────────────────────────────────────── */
+.auth-body {
+  align-items: center;
+}
+
+.auth-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  padding-bottom: 8px;
+}
+
+.auth-card h1 {
+  padding: 32px 24px 20px;
+}
+
+.auth-tabs {
+  display: flex;
+  padding: 0 24px 20px;
+  gap: 8px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.auth-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+
+.auth-form {
+  padding: 0 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-input {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.auth-input:focus {
+  border-color: #667eea;
+}
+
+.auth-error {
+  color: #e74c3c;
+  font-size: 0.875rem;
+  min-height: 1.2em;
+  margin: -4px 0;
+}
+
+.auth-submit {
+  padding: 13px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.auth-submit:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.auth-submit:active {
+  transform: translateY(0);
+}
